@@ -1,8 +1,8 @@
 package com.jgc.springsecurity.domain;
 
-public class Role {
+public class Permission {
     private Integer id;
-    private String role;
+    private String url;
     private String descript;
     private Integer status;
 
@@ -14,12 +14,12 @@ public class Role {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getUrl() {
+        return url;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getDescript() {
