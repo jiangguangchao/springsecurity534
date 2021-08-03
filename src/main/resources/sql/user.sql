@@ -8,3 +8,7 @@ create table t_user (
 insert into t_user (username, password, status) VALUES (
     'jgc','jgc',1
 );
+
+insert into t_user (username, password, status) VALUES (
+    'xm','xm',1
+);

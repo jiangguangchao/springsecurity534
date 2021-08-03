@@ -13,7 +13,7 @@
 		id, username, password, status
 	</sql>
 
-    <select id="getPerson" parameterType="User" resultType="User">
+    <select id="getUser" parameterType="User" resultType="User">
         select
         <include refid="colum"></include>
         from t_user
