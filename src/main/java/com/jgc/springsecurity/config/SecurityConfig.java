@@ -42,6 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * 这个决策器的逻辑是：只要有反对的，那结果就是反对。（这个决策器没有测试过）
      *
      * 这里还有一个办法，就是重写默认的投票器WebExpressionVoter的 vote（）方法。
+     * 经过测试，这种方法可行。
+     *
+     * 整体看下上面的过程，用到了自定义的ObjectPostProcessor。其实spring security启动过程 有很多的 init（），
+     * beforeConfig（）,config()等方法, 可以在某个beforeConfig（）方法中使用自定义的投票器替换默认的投票器。
+     * 这个没有测试，懒得测试了。仅仅是记录下这种思路。
      *
      * @param http
      * @throws Exception
