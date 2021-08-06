@@ -14,4 +14,6 @@ public interface UserService {
     public List<Role> getRoles(String username);
 
     public List<Permission> getPermissions(String username);
+
+    public void saveUser(User user);
 }

@@ -38,5 +38,11 @@
             and rp.perm_id = p.id
     </select>
 
+    <insert id="saveUser" parameterType="User" >
+        insert into t_user (username, password, status) VALUES (
+            #{username},#{password},1
+        );
+    </insert>
+
 
 </mapper>

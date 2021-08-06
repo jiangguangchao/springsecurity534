@@ -1,5 +1,6 @@
 package com.jgc.springsecurity.config;
 
+import com.alibaba.fastjson.JSON;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -9,6 +10,8 @@ import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @program: springsecurity534
@@ -32,7 +35,10 @@ public class MyWebExpressionVoter extends WebExpressionVoter {
             return ACCESS_DENIED;
         }
 
-        if (!list.contains(uri)) {
+        List<String> urls = list.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());
+        System.out.println("自定义投票器投票时打印当前登录用户权限：" + JSON.toJSONString(urls));
+
+        if (!urls.contains(uri)) {
             System.out.println("没有有权访问 ，不通过");
             return ACCESS_DENIED;
         }

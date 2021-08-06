@@ -12,3 +12,5 @@ insert into t_user (username, password, status) VALUES (
 insert into t_user (username, password, status) VALUES (
     'xm','xm',1
 );
+
+alter table t_user modify password varchar(100) not null;

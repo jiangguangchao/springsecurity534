@@ -11,4 +11,5 @@ public interface UserDao {
     public List<User> getUser(User user);
     public List<Role> getRoles(String username);
     public List<Permission> getPermissions(String username);
+    public void saveUser(User user);
 }

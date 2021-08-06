@@ -1,5 +1,6 @@
 package com.jgc.springsecurity.config;
 
+import com.alibaba.fastjson.JSON;
 import com.jgc.springsecurity.domain.Permission;
 import com.jgc.springsecurity.domain.User;
 import com.jgc.springsecurity.service.UserService;
@@ -40,6 +41,7 @@ public class MyUserDetailService implements UserDetailsService {
             });
         }
         userDetails.setAuthorities(collection);
+        System.out.println("获取用户时打印用户权限：" + JSON.toJSONString(userDetails));
         return userDetails;
     }
 }

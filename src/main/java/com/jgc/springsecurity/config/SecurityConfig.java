@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.CollectionUtils;
@@ -48,6 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      * beforeConfig（）,config()等方法, 可以在某个beforeConfig（）方法中使用自定义的投票器替换默认的投票器。
      * 这个没有测试，懒得测试了。仅仅是记录下这种思路。
      *
+     * 网上见过一种方法是向spring容器中放入一个自定义的决策器，然后这个决策器中包含自定义的投票器。没测试过这种能否起作用。
+     *
      * @param http
      * @throws Exception
      */
@@ -68,7 +71,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 
 
