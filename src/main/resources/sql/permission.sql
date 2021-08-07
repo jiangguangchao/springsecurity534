@@ -25,3 +25,9 @@ insert into t_permission (url, descript, status) VALUES (
     '/student/delete','删除学生',1
 );
 
+insert into t_permission (url, descript, status) VALUES (
+    '/home.html','首页',1
+);
+
+
+

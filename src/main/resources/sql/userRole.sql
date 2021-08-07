@@ -10,5 +10,9 @@ insert into t_user_role (role_id, username, status) VALUES (
     2,'xm',1
 );
 
+insert into t_user_role (role_id, username, status) VALUES (
+   1,'jgc',1
+);
+
 
 

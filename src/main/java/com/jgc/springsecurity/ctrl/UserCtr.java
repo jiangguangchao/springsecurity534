@@ -35,7 +35,7 @@ public class UserCtr {
 
     public static void main(String[] args) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encoderPassword = encoder.encode("xm");
+        String encoderPassword = encoder.encode("jgc");
         System.out.println(encoderPassword);
     }
 }

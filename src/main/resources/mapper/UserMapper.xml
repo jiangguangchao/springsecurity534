@@ -38,6 +38,13 @@
             and rp.perm_id = p.id
     </select>
 
+    <select id="getRoles" parameterType="string" resultType="Role">
+        select r.id, r.role, r.descript, r.status
+        from t_role r ,t_user_role ur
+        where ur.username = #{username}
+            and ur.role_id = r.id
+    </select>
+
     <insert id="saveUser" parameterType="User" >
         insert into t_user (username, password, status) VALUES (
             #{username},#{password},1

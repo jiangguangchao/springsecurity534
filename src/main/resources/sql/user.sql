@@ -14,3 +14,4 @@ insert into t_user (username, password, status) VALUES (
 );
 
 alter table t_user modify password varchar(100) not null;
+

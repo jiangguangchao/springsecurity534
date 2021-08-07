@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Role> getRoles(String username) {
-        return null;
+        return userDao.getRoles(username);
     }
 
     @Override
