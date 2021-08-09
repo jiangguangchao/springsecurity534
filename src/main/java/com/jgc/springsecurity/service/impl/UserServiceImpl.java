@@ -1,10 +1,8 @@
 package com.jgc.springsecurity.service.impl;
 
 import com.jgc.springsecurity.dao.UserDao;
-import com.jgc.springsecurity.domain.Permission;
-import com.jgc.springsecurity.domain.Person;
-import com.jgc.springsecurity.domain.Role;
-import com.jgc.springsecurity.domain.User;
+import com.jgc.springsecurity.dao.UserRoleDao;
+import com.jgc.springsecurity.domain.*;
 import com.jgc.springsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private UserRoleDao userRoleDao;
 
 
     @Override
@@ -50,5 +51,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(User user) {
         userDao.saveUser(user);
+
+        //新创建的用户默认 添加普通用户角色，以便使用（如果没有基本的角色，登录后无法看到主页，也不能访问登录后的其他页面）
+        UserRole ur = new UserRole();
+        ur.setRoleId(2);
+        ur.setUsername(user.getUsername());
+        userRoleDao.saveUserRole(ur);
     }
 }

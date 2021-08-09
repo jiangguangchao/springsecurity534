@@ -24,7 +24,7 @@ public class UserCtr {
     }
 
     @PostMapping("/add")
-    public String add(@RequestBody User user) {
+    public String add(User user) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encoderPassword = encoder.encode(user.getPassword());
         user.setPassword(encoderPassword);

@@ -64,6 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().and()
                 .httpBasic();
+        http.csrf().disable();
 
 //        List<ExpressionUrlAuthorizationConfigurer> configs = http.getConfigurers(ExpressionUrlAuthorizationConfigurer.class);
 //        if (CollectionUtils.isEmpty(configs)) {
