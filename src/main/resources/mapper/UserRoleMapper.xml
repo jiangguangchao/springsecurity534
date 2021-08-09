@@ -47,7 +47,7 @@
 
     <insert id="saveUserRole" parameterType="UserRole" >
         insert into t_user_role (role_id, username, status) VALUES (
-            #{roleId},#{username},1
+            #{roleId},#{username},#{status}
         );
     </insert>
 

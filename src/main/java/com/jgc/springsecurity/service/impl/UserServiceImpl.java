@@ -6,6 +6,7 @@ import com.jgc.springsecurity.domain.*;
 import com.jgc.springsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -18,6 +19,7 @@ import java.util.List;
  */
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -56,6 +58,7 @@ public class UserServiceImpl implements UserService {
         UserRole ur = new UserRole();
         ur.setRoleId(2);
         ur.setUsername(user.getUsername());
+        ur.setStatus(33333333);
         userRoleDao.saveUserRole(ur);
     }
 }

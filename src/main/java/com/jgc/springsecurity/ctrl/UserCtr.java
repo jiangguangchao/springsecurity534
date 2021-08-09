@@ -25,11 +25,12 @@ public class UserCtr {
 
     @PostMapping("/add")
     public String add(User user) {
+        System.out.println("打印userService:" + userService);
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encoderPassword = encoder.encode(user.getPassword());
         user.setPassword(encoderPassword);
         userService.saveUser(user);
-        System.out.println("添加用户成功");
+        System.out.println("添加用户成功 userService:" + userService);
         return "user add success";
     }
 
