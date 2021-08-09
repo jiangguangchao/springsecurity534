@@ -56,17 +56,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        super.configure(http);
-        List<ExpressionUrlAuthorizationConfigurer> configs = http.getConfigurers(ExpressionUrlAuthorizationConfigurer.class);
-        if (CollectionUtils.isEmpty(configs)) {
-            System.out.println("configs is null");
-        } else {
-            System.out.println("configs size:" + configs.size());
-            for (ExpressionUrlAuthorizationConfigurer config : configs) {
-                System.out.println("这里添加post processor");
-                config.addObjectPostProcessor(new MyObjectPostProcessor());
-            }
-        }
+        http
+                .authorizeRequests()
+                .antMatchers("/js/jquery-3.6.0.min.js").permitAll()
+                .antMatchers("/home.html").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().and()
+                .httpBasic();
+
+//        List<ExpressionUrlAuthorizationConfigurer> configs = http.getConfigurers(ExpressionUrlAuthorizationConfigurer.class);
+//        if (CollectionUtils.isEmpty(configs)) {
+//            System.out.println("configs is null");
+//        } else {
+//            System.out.println("configs size:" + configs.size());
+//            for (ExpressionUrlAuthorizationConfigurer config : configs) {
+//                System.out.println("这里添加post processor");
+//                config.addObjectPostProcessor(new MyObjectPostProcessor());
+//            }
+//        }
     }
 
     @Bean

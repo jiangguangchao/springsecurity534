@@ -23,6 +23,7 @@ public class MyObjectPostProcessor implements ObjectPostProcessor {
             if (CollectionUtils.isEmpty(voterList)) {
                 System.out.println("暂不添加投票器");
             } else {
+                System.out.println("投票器：" + voterList);
                 voterList.remove(0);
                 voterList.add(new MyWebExpressionVoter());
             }

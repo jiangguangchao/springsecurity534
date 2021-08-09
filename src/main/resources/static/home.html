@@ -3,9 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <script type="text/javascript" src="./js/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <h2>这是首页！！！</h2>
+    <div>
+        <p>跨域请求地址：http://localhost:8081/web/hello，这个地址对应的项目可以到https://github.com/jiangguangchao/myproject.git找</p>
+        <button id="csrf-button-get" type="button" class="btn btn-default">点击发起跨域请求（GET）</button>
+    </div>
+    <p>------------------------------------分割线-------------------------------------</p>
+    <div>
+        <p>跨域请求地址：http://localhost:8081/web/hello</p>
+        <button id="csrf-button-post" type="button" class="btn btn-default">点击发起跨域请求（POST）</button>
+    </div>
+    <p>------------------------------------分割线-------------------------------------</p>
+    <div>
+        <p>跨域请求地址：http://localhost:8081/web/hello</p>
+        <p>自定义header，以便发起带有预检的跨域请求</p>
+        <button id="csrf-button-post-custom-header" type="button" class="btn btn-default">点击发起跨域请求（POST）</button>
+    </div>
 
 </body>
+
+<script>
+    $("#csrf-button-get").click(
+        function() {
+            $.ajax({
+                url:'http://localhost:8081/web/hello',
+                type:'GET',
+                success: function(){
+                    console.log("跨域请求成功");
+                }
+            })
+
+        }
+    );
+
+    $("#csrf-button-post").click(
+        function() {
+            $.ajax({
+                url:'http://localhost:8081/web/hello',
+                type:'POST',
+                success: function(){
+                    console.log("跨域请求成功");
+                }
+            })
+
+        }
+    );
+
+    /**
+     * 问题描述：这里因为自定义了header，所以是非简单请求，也就是先发起预检请求，然后
+     * 在发起真正的请求。如果预检请求不通过，应该是不发起真正的请求的，但是这里在预检不通过的
+     * 情况下依然发起了真正的请求，不知道为什么？
+     */
+    $("#csrf-button-post-custom-header").click(
+        function() {
+            // $.ajax({
+            //     url:'http://localhost:8081/web/hello',
+            //     type:'POST',
+            //     beforeSend: function(request) {
+            //         request.setRequestHeader("My-Custome-Header", "hhhh");
+            //     },
+            //     success: function(){
+            //         console.log("跨域请求成功");
+            //     }
+            // })
+
+            var url = 'http://localhost:8081/web/hello';
+            var xhr = new XMLHttpRequest();
+            xhr.open('PUT', url, true);
+            xhr.setRequestHeader('X-Custom-Header', 'value');
+            xhr.send();
+
+        }
+    );
+</script>
 </html>
