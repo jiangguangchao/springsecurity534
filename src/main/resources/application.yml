@@ -6,3 +6,5 @@ spring:
     url: jdbc:mysql://localhost:3306/jgctest?autoReconnect=true&useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: jgc
+  profiles:
+    active: dev

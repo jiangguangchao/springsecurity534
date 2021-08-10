@@ -4,10 +4,12 @@ import com.jgc.springsecurity.domain.User;
 import com.jgc.springsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
+//@Transactional
 public class UserCtr {
 
     @Autowired
@@ -25,7 +27,7 @@ public class UserCtr {
 
     @PostMapping("/add")
     public String add(User user) {
-        System.out.println("打印userService:" + userService);
+        System.out.println("打印userService:" + userService.getClass().getName());
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String encoderPassword = encoder.encode(user.getPassword());
         user.setPassword(encoderPassword);
