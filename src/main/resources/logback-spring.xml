@@ -75,7 +75,7 @@
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
         <!--<logger name="com.phfund" level="debug"/>-->
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="CONSOLE" />
 <!--            <appender-ref ref="RUNTIME" />-->
 <!--            <appender-ref ref="ERROR" />-->
