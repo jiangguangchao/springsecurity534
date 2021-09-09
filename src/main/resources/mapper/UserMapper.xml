@@ -48,7 +48,7 @@
 
     <insert id="saveUser" parameterType="User" >
         insert into t_user (username, password, status,createTime) VALUES (
-            #{username},#{password},1,#{createTime}
+            #{username},#{password},1,#{createTime, typeHandler = com.jgc.springsecurity.handler.mybatis.MyDateTypeHandler}
         );
     </insert>
 
