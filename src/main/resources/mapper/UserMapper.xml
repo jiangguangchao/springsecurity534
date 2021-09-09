@@ -7,10 +7,11 @@
         <result column="username" property="username" />
         <result column="password" property="password" />
         <result column="status" property="status" />
+        <result column="createTime" property="createTime" />
     </resultMap>
 
     <sql id="colum" >
-		id, username, password, status
+		id, username, password, status, createTime
 	</sql>
 
     <select id="getUser" parameterType="User" resultType="User">
@@ -46,8 +47,8 @@
     </select>
 
     <insert id="saveUser" parameterType="User" >
-        insert into t_user (username, password, status) VALUES (
-            #{username},#{password},1
+        insert into t_user (username, password, status,createTime) VALUES (
+            #{username},#{password},1,#{createTime}
         );
     </insert>
 

@@ -1,5 +1,7 @@
 package com.jgc.springsecurity.domain;
 
+import java.util.Date;
+
 /**
  * @program: springsecurity534
  * @description:
@@ -11,6 +13,7 @@ public class User {
     private String username;
     private String password;
     private Integer status;
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -42,5 +45,13 @@ public class User {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
