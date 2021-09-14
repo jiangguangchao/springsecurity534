@@ -13,8 +13,21 @@ public class CalendarTest {
     @Test
     public void f1() {
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR, 2020);
-        c.set(Calendar.MONTH, 5);
+        c.set(Calendar.YEAR, 1970);
+        c.set(Calendar.MONTH, 0);
         c.getTimeInMillis();
+    }
+
+
+    @Test
+    public void f2() {
+        Long oneDayTime = 24 * 60 *60 *1000L;
+        Long oneHourTime = 60 * 60 * 1000L;
+        Long time = 1205615475L;
+        Long day = time / oneDayTime;
+        Long hourTime = time %oneDayTime;
+        Long hour = hourTime / oneHourTime;
+
+        log.info(day.toString() + ", " + hour.toString());
     }
 }
