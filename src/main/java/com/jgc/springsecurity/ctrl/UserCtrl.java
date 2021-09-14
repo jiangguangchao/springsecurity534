@@ -1,21 +1,16 @@
 package com.jgc.springsecurity.ctrl;
 
-import com.alibaba.fastjson.JSON;
-import com.jgc.springsecurity.domain.Person;
 import com.jgc.springsecurity.domain.User;
 import com.jgc.springsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
 
 @RestController
 @RequestMapping("/user")
 //@Transactional
-public class UserCtr {
-
+public class UserCtrl {
 
     @Autowired
     private UserService userService;
@@ -219,11 +214,8 @@ public class UserCtr {
 
 
     public static void main(String[] args) {
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        String encoderPassword = encoder.encode("jgc");
-//        System.out.println(encoderPassword);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        String encoderPassword = encoder.encode("jgc");
+        System.out.println(encoderPassword);
     }
 }

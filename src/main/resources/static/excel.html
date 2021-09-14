@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div>
+        <p>导出excel</p>
+        <button id="b1">点击导出11</button>
+    </div>
+</body>
+<script>
+    document.getElementById("b1").onclick = function () {
+        console.log("点击了按钮")
+        downExcel()
+    }
+
+    function downExcel() {
+        var url = "/excel/down"
+        var xhr = new XMLHttpRequest();		//定义http请求对象
+        xhr.open("GET", url, true);
+        xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xhr.send();
+        xhr.responseType = "blob";  // 返回类型blob
+        xhr.onload = function() {   // 定义请求完成的处理函数，请求前也可以增加加载框/禁用下载按钮逻辑
+            if (this.status === 200) {
+                var blob = this.response;
+                //alert(this.readyState);
+                //alert(xhr.getAllResponseHeaders());
+                console.log(xhr.getResponseHeader("content-disposition"))
+                let temp = xhr.getResponseHeader("content-disposition").split(";")[1].split("filename=")[1];
+                var fileName = decodeURIComponent(temp);
+                //var hh = xhh.getResponseHeader("fileName");
+
+                //var fileName = this.response.headers["content-disposition"].split(";")[1].split("filename=")[1];
+                //console.log("fileName="+fileName)
+                //console.log(xhr.getResponseHeader("content-disposition"))
+                var reader = new FileReader();
+                reader.readAsDataURL(blob);  // 转换为base64，可以直接放入a标签href
+                reader.onload = function (e) {
+                    console.log(e);			//查看有没有接收到数据流
+                    // 转换完成，创建一个a标签用于下载
+                    var a = document.createElement('a');
+                    a.download = fileName;			//自定义下载文件名称
+                    a.href = e.target.result;
+                    // $("body").append(a);    // 修复firefox中无法触发click
+                    a.click();
+                    //$(a).remove();
+                }
+            } else {
+                alert("出现了未知的错误!");
+            }
+        }
+    }
+
+
+</script>
+</html>

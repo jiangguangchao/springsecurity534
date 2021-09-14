@@ -1,6 +1,5 @@
 package com.jgc.springsecurity.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.jgc.springsecurity.dao.UserDao;
 import com.jgc.springsecurity.dao.UserRoleDao;
 import com.jgc.springsecurity.domain.*;
@@ -10,10 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @program: springsecurity534
@@ -37,7 +33,6 @@ public class UserServiceImpl implements UserService {
     public User getUser(String username) {
         User u = new User();
         u.setUsername(username);
-//        u.setCreateTime(new Date());
         List<User> list = userDao.getUser(u);
         if (CollectionUtils.isEmpty(list)) {
             return null;
@@ -69,24 +64,5 @@ public class UserServiceImpl implements UserService {
 //        ur.setUsername(user.getUsername());
 //        ur.setStatus(33333333);
 //        userRoleDao.saveUserRole(ur);
-    }
-
-    @Override
-    public void saveUserForMap(Map user) {
-        userDao.saveUserForMap(user);
-    }
-
-
-    public static void main(String[] args) {
-        Map<String,Object> map = new HashMap();
-        map.put("date", new Date());
-        System.out.println(map.get("date").getClass().getName());
-
-        User u = new User();
-        u.setId(1);
-        u.setCreateTime(new Date());
-        Map<String, Object> map2 = JSON.toJavaObject((JSON) JSON.toJSON(u), Map.class);
-        System.out.println(map2.get("createTime").getClass().getName());
-        System.out.println(JSON.toJSONString(map2));
     }
 }

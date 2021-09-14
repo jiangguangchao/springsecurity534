@@ -15,7 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
-//@Configuration
+@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    @Override
