@@ -1,5 +1,7 @@
 package com.jgc.springsecurity.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -13,7 +15,30 @@ public class User {
     private String username;
     private String password;
     private Integer status;
+
+    /**
+     * 对应数据库是datetime类型
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
+
+    /**
+     * 对应数据库是time类型
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date startWrokTime;
+
+    /**
+     * 对应数据库是date类型
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date birthday;
+
+    /**
+     * 对应数据库是timestamp类型
+     */
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private Date leaveTime;
 
     public Integer getId() {
         return id;
@@ -53,5 +78,29 @@ public class User {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Date getStartWrokTime() {
+        return startWrokTime;
+    }
+
+    public void setStartWrokTime(Date startWrokTime) {
+        this.startWrokTime = startWrokTime;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public Date getLeaveTime() {
+        return leaveTime;
+    }
+
+    public void setLeaveTime(Date leaveTime) {
+        this.leaveTime = leaveTime;
     }
 }

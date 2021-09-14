@@ -8,10 +8,13 @@
         <result column="password" property="password" />
         <result column="status" property="status" />
         <result column="createTime" property="createTime" />
+        <result column="startWrokTime" property="startWrokTime" />
+        <result column="birthday" property="birthday" />
+        <result column="leaveTime" property="leaveTime" />
     </resultMap>
 
     <sql id="colum" >
-		id, username, password, status, createTime
+		id, username, password, status, createTime, startWrokTime,birthday,leaveTime
 	</sql>
 
     <select id="getUser" parameterType="User" resultType="User">
@@ -27,6 +30,18 @@
             </if>
             <if test="status != null" >
                 and status = #{status}
+            </if>
+            <if test="createTime != null" >
+                and createTime = #{createTime}
+            </if>
+            <if test="startWrokTime != null" >
+                and startWrokTime = #{startWrokTime}
+            </if>
+            <if test="birthday != null" >
+                and birthday = #{birthday}
+            </if>
+            <if test="leaveTime != null" >
+                and leaveTime = #{leaveTime}
             </if>
         </where>
     </select>
@@ -47,8 +62,26 @@
     </select>
 
     <insert id="saveUser" parameterType="User" >
-        insert into t_user (username, password, status,createTime) VALUES (
-            #{username},#{password},1,#{createTime, typeHandler = com.jgc.springsecurity.handler.mybatis.MyDateTypeHandler}
+        insert into t_user (username, password, status,createTime, startWrokTime,birthday,leaveTime) VALUES (
+            #{username},
+            #{password},
+            1,
+            #{createTime, typeHandler = com.jgc.springsecurity.handler.mybatis.MyDateTypeHandler},
+            #{startWrokTime},
+            #{birthday},
+            #{leaveTime}
+        );
+    </insert>
+
+    <insert id="saveUserForMap" parameterType="map">
+        insert into t_user (username, password, status,createTime, startWrokTime,birthday,leaveTime) VALUES (
+            #{username},
+            #{password},
+            1,
+            #{createTime},
+            #{startWrokTime},
+            #{birthday},
+            #{leaveTime}
         );
     </insert>
 

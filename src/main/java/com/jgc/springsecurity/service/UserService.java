@@ -6,6 +6,7 @@ import com.jgc.springsecurity.domain.Role;
 import com.jgc.springsecurity.domain.User;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UserService {
 
@@ -16,4 +17,6 @@ public interface UserService {
     public List<Permission> getPermissions(String username);
 
     public void saveUser(User user);
+
+    public void saveUserForMap(Map user);
 }
