@@ -33,7 +33,7 @@ public class Test1 {
     public void f2() {
         StandardEvaluationContext context = new StandardEvaluationContext();
         Person p = new Person();
-        p.setName("jgc");
+//        p.setName("jgc");
         context.setVariable("per",p);
         ExpressionParser parser1 = new SpelExpressionParser();
         ExpressionParser parser2 = new SpelExpressionParser();
@@ -51,7 +51,7 @@ public class Test1 {
     public void f3() {
         StandardEvaluationContext context = new StandardEvaluationContext();
         Person p = new Person();
-        p.setName("jgc");
+//        p.setName("jgc");
         context.setRootObject(p);//设置rootObject后，之后取值不需要#和对象，直接写属性或者方法名
         ExpressionParser parser1 = new SpelExpressionParser();
         ExpressionParser parser2 = new SpelExpressionParser();
