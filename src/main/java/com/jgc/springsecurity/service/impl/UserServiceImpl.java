@@ -1,7 +1,6 @@
 package com.jgc.springsecurity.service.impl;
 
 import com.jgc.springsecurity.dao.UserDao;
-import com.jgc.springsecurity.dao.UserRoleDao;
 import com.jgc.springsecurity.domain.*;
 import com.jgc.springsecurity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @program: springsecurity534
@@ -25,8 +26,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
-    @Autowired
-    private UserRoleDao userRoleDao;
+//    @Autowired
+//    private UserRoleDao userRoleDao;
 
 
     @Override
@@ -64,5 +65,10 @@ public class UserServiceImpl implements UserService {
 //        ur.setUsername(user.getUsername());
 //        ur.setStatus(33333333);
 //        userRoleDao.saveUserRole(ur);
+    }
+
+    @Override
+    public void saveUserForMap(Map user) {
+        userDao.saveUserForMap(user);
     }
 }

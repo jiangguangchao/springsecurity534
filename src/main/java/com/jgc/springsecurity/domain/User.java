@@ -16,6 +16,7 @@ public class User {
     private String password;
     private Integer status;
 
+
     /**
      * 对应数据库是datetime类型
      */
