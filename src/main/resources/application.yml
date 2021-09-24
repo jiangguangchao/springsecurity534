@@ -35,3 +35,8 @@ spring:
     filters: stat, wall, log4j
     # 通过connectProperties属性来打开mergeSql功能，慢SQL记录
 #    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+
+#设置指定包下的日志级别
+logging:
+  level:
+    org: debug
