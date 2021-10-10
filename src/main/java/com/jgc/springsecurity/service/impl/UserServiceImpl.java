@@ -42,6 +42,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUser(Integer id) {
+        User u = new User();
+        u.setId(id);
+        List<User> list = userDao.getUser(u);
+        if (CollectionUtils.isEmpty(list)) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    @Override
     public List<Role> getRoles(String username) {
         return userDao.getRoles(username);
     }

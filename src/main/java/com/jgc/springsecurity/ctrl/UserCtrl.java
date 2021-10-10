@@ -34,6 +34,12 @@ public class UserCtrl {
         return u;
     }
 
+    @GetMapping("/id")
+    public User getUser(@RequestParam Integer id) {
+        User u = userService.getUser(id);
+        return u;
+    }
+
 
     @GetMapping("/update")
     public String update() {
