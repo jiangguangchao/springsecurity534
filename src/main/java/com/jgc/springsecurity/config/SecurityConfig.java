@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/js/jquery-3.6.0.min.js").permitAll()
-                .antMatchers("/home.html").permitAll()
+                .antMatchers("/home.html", "/user/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().and()
