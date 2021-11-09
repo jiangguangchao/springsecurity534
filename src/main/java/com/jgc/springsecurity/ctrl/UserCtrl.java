@@ -3,23 +3,30 @@ package com.jgc.springsecurity.ctrl;
 import com.alibaba.fastjson.JSON;
 import com.jgc.springsecurity.domain.User;
 import com.jgc.springsecurity.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/user")
 //@Transactional
 public class UserCtrl {
+    
+    private static final Logger log = LoggerFactory.getLogger(UserCtrl.class);
 
     @Autowired
     private UserService userService;
 
-    @GetMapping("/list")
-    public String list() {
+    @PostMapping("/list")
+    public String list(@RequestBody User user) {
+        System.out.println(JSON.toJSONString(user));
         return "userList";
     }
 
@@ -223,6 +230,28 @@ public class UserCtrl {
 
 
     public static void main(String[] args) {
+        try {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jgctest", "root", "jgc");
+            if (connection == null) {
+                System.out.println("connect == null");
+                return;
+            }
+            System.out.println("connect != null");
 
+            DatabaseMetaData databaseMetaData = connection.getMetaData();
+            ResultSet tSet = databaseMetaData.getTables("jgctest", "%", "%", new String[]{"TABLE"});
+            while (tSet.next()) {
+                String tableName = tSet.getString("TABLE_NAME");
+                System.out.println("表名称：" + tableName + "， 类型：" + tSet.getString("TABLE_TYPE"));
+            }
+            ResultSet tableType = databaseMetaData.getTypeInfo();
+            while(tableType.next()) {
+                System.out.println("字段名称：" + tableType.getString(1));
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("异常：" + e);
+        }
     }
 }

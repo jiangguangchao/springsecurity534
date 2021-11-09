@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 public class CalendarTest {
@@ -29,5 +30,21 @@ public class CalendarTest {
         Long hour = hourTime / oneHourTime;
 
         log.info(day.toString() + ", " + hour.toString());
+    }
+
+    @Test
+    public void f3() {
+        BigDecimal X = new BigDecimal(3843513.17877323);
+        BigDecimal originX = new BigDecimal(3843513.18615704);
+        BigDecimal originX2 = new BigDecimal(3843513.18615830);
+
+        BigDecimal diffX = X.subtract(originX);
+        BigDecimal diffX2 = X.subtract(originX2);
+        BigDecimal diffOriginX = originX.subtract(originX2);
+        log.info("diffX:{}, diffX2:{}, diffOriginX:{}", diffX, diffX2, diffOriginX);
+
+
+
+
     }
 }
