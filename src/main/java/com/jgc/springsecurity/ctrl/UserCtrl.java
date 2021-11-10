@@ -6,9 +6,11 @@ import com.jgc.springsecurity.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -25,8 +27,13 @@ public class UserCtrl {
     private UserService userService;
 
     @PostMapping("/list")
-    public String list(@RequestBody User user) {
-        System.out.println(JSON.toJSONString(user));
+    public String list(User user, HttpServletRequest request, Authentication au) {
+        if (au == null) {
+            return "au is null";
+        }
+        String contentType = request.getHeader("content-type");
+        System.out.println("content-type:  " + contentType);
+        System.out.println("list:  " + JSON.toJSONString(user));
         return "userList";
     }
 
@@ -48,7 +55,7 @@ public class UserCtrl {
     }
 
     @PostMapping("/add")
-    public String add(User user) {
+    public String add( User user) {
         System.out.println("打印userService:" + userService.getClass().getName());
 //        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //        String encoderPassword = encoder.encode(user.getPassword());
