@@ -37,6 +37,7 @@ public class MyFilterConfig {
      * 设置order的值。
      * 比如这里设置为-200，因为spring security默认是-100，所以就可以使
      * 自定义过滤器在spring security过滤器前执行。实际效果，也确实这样。
+     * 这里需要注意： order设置的值越小优先级越高，
      *
      * @return
      */
