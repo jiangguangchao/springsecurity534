@@ -12,6 +12,8 @@ public interface UserService {
 
     public User getUser(String username);
 
+    public User getUser(Integer id);
+
     public List<Role> getRoles(String username);
 
     public List<Permission> getPermissions(String username);
