@@ -39,4 +39,4 @@ spring:
 #设置指定包下的日志级别
 logging:
   level:
-    org: debug
+    root: debug

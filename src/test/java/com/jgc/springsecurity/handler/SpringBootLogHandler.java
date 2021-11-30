@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * @program: springsecurity534
- * @description:
+ * @description: 从spring启动日志中提取bean，并按照bena的依赖关系生成xml，注意：需要将spring日志调为trace模式
  * @author:
  * @create: 2021-08-31 16:02
  */
@@ -38,13 +38,17 @@ public class SpringBootLogHandler {
         String start = "Creating instance of bean";
         String end = "Finished creating instance of bean";
 
+        String basePath = "D:\\logs\\";
+
+        //日志文件
+        String logFile = basePath + "log.txt";
         //xml文件生成位置
-        String filePath = "C:\\Users\\Administrator\\Desktop\\111.txt";
+        String xmlFile = basePath + "log.xml";
 
         BufferedReader br = null;
         List<String> list = new ArrayList<String>();
         try {
-            br = new BufferedReader(new FileReader(filePath));
+            br = new BufferedReader(new FileReader(logFile));
             String line = br.readLine();
             Document document = getDocument();
             Element root = document.createElement("beans");
@@ -78,7 +82,7 @@ public class SpringBootLogHandler {
                 line = br.readLine();
             }
             document.appendChild(root);
-            writeXmlToFile(document, null);
+            writeXmlToFile(document, xmlFile);
         } catch (Exception e) {
             log.error("日志文件解析异常", e);
 

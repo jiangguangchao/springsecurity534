@@ -79,6 +79,10 @@ public class HelloCtrl implements BeanFactoryAware {
 
         }
 
+        log.info("测试日志配置 -- 这是info日志");
+
+        log.debug("测试日志配置 -- 这是debug日志");
+
         return "hello security";
     }
 
@@ -86,5 +90,19 @@ public class HelloCtrl implements BeanFactoryAware {
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
         log.info("设置beanFactory 属性");
         this.beanFactory = beanFactory;
+    }
+
+
+    public static void main(String[] args) {
+        Boolean f = null;
+        HelloCtrl h = new HelloCtrl();
+        h.change(f);
+        System.out.println(f);
+
+    }
+
+    public void change(Boolean f) {
+        f = Boolean.parseBoolean("true");
+
     }
 }

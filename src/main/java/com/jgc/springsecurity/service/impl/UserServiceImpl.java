@@ -3,8 +3,14 @@ package com.jgc.springsecurity.service.impl;
 import com.jgc.springsecurity.dao.UserDao;
 import com.jgc.springsecurity.domain.*;
 import com.jgc.springsecurity.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionDefinition;
+import org.springframework.transaction.TransactionManager;
+import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
@@ -20,8 +26,12 @@ import java.util.Map;
  */
 
 @Service
-@Transactional
 public class UserServiceImpl implements UserService {
+    
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    @Autowired
+    private DataSourceTransactionManager transactionManager;
 
     @Autowired
     private UserDao userDao;
@@ -32,6 +42,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(String username) {
+        
+        if (transactionManager == null) {
+            log.info("dstm is null");
+        } else {
+            log.info("dstm is not null");
+        }
+
+        TransactionStatus ts = transactionManager.getTransaction(new TransactionDefinition() {
+        });
+
+        transactionManager.commit(ts);
+
+
         User u = new User();
         u.setUsername(username);
         List<User> list = userDao.getUser(u);
