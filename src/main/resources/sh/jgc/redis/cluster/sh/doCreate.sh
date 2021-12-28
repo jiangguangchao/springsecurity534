@@ -19,7 +19,7 @@ for (( i = 0; i < $mCount; i++ )); do
     cd $typePath
     mkdir $port
     cp $basePath/baseConf/redis.conf $port/redis.conf
-    sed -i "/^bind/c bind 0.0.0.0" $port/redis.conf
+    sed -i "/^bind/c bind 110.42.197.207 127.0.0.1" $port/redis.conf
     sed -i "/^port/c port $port" $port/redis.conf
     sed -i "/^daemonize/c daemonize yes" $port/redis.conf
     sed -i "/^# cluster-enabled/c cluster-enabled yes" $port/redis.conf
