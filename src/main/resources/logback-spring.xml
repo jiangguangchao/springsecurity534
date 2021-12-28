@@ -13,7 +13,7 @@
     <!-- %m输出的信息,%p日志级别,%t线程名,%d日期,%c类的全名,%-5level:级别从左显示5个字符宽度,%msg:日志消息,%i索引【从数字0开始递增】 -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
-            <level>info</level>
+            <level>debug</level>
         </filter>
         <encoder>
             <!--%logger{50}:表示logger名字最长50个字符，否则按照句点分割-->

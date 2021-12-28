@@ -1,5 +1,7 @@
 package com.jgc.springsecurity.juc.test;
 
+import org.springframework.security.core.annotation.CurrentSecurityContext;
+
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -8,6 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author:
  * @create: 2021-11-30 18:00
  */
+
 public class WaitTest3 {
 
     public static Object obj = new Object();

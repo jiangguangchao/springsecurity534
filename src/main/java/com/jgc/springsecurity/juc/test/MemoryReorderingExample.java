@@ -1,4 +1,4 @@
-package com.jgc.springsecurity.test;
+package com.jgc.springsecurity.juc.test;
 
 /**
  * @program: springsecurity534

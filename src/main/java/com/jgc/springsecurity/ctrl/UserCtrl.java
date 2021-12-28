@@ -11,6 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -18,7 +21,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/user")
-//@Transactional
+@Transactional
 public class UserCtrl {
     
     private static final Logger log = LoggerFactory.getLogger(UserCtrl.class);
@@ -26,14 +29,20 @@ public class UserCtrl {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/list")
-    public String list(User user, HttpServletRequest request, Authentication au) {
+    @GetMapping("/list")
+    public String list(User user, HttpServletRequest request, HttpServletResponse response, Authentication au) throws UnsupportedEncodingException {
         if (au == null) {
-            return "au is null";
+             log.info("au is null");
         }
         String contentType = request.getHeader("content-type");
         System.out.println("content-type:  " + contentType);
         System.out.println("list:  " + JSON.toJSONString(user));
+
+        String myHeader = "中文测试";
+//        myHeader = URLEncoder.encode(myHeader, "UTF-8");
+        response.setHeader("MyHeader", myHeader);
+        response.setContentType("text/html; charset=UTF-8");
+
         return "userList";
     }
 
@@ -236,29 +245,14 @@ public class UserCtrl {
 
 
 
-    public static void main(String[] args) {
-        try {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/jgctest", "root", "jgc");
-            if (connection == null) {
-                System.out.println("connect == null");
-                return;
-            }
-            System.out.println("connect != null");
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        String str = URLEncoder.encode("中文测试", "UTF-8");
+        System.out.println(str);
 
-            DatabaseMetaData databaseMetaData = connection.getMetaData();
-            ResultSet tSet = databaseMetaData.getTables("jgctest", "%", "%", new String[]{"TABLE"});
-            while (tSet.next()) {
-                String tableName = tSet.getString("TABLE_NAME");
-                System.out.println("表名称：" + tableName + "， 类型：" + tSet.getString("TABLE_TYPE"));
-            }
-            ResultSet tableType = databaseMetaData.getTypeInfo();
-            while(tableType.next()) {
-                System.out.println("字段名称：" + tableType.getString(1));
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("异常：" + e);
+        System.out.println("length:" + str.length());
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            System.out.println("c: " + c);
         }
     }
 }
