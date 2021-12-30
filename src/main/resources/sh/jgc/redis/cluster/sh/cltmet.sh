@@ -9,10 +9,9 @@
 #redis-cli -p 7002 -a 123456789 cluster replicate $node_id_m
 #redis-cli -p 7003 -a 123456789 cluster replicate $node_id_m
 firstPort=$2
-IP=110.42.197.207
 for i in $(seq 1 $(($1-1)) )
 do
     port=$(($i + $2))
     echo "将$port并入集群$firstPort"
-    redis-cli -h $IP -p $firstPort cluster meet $IP $port
+    redis-cli -h $HOST -p $firstPort -a jgc123 cluster meet $HOST $port
 done

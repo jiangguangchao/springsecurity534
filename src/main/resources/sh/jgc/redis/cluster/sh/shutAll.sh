@@ -28,7 +28,7 @@ getPidByPort(){
 
 shutDownRedis() {
     port=$1
-    redis-cli -p $port shutdown
+    redis-cli -p $port -a jgc123 shutdown
     useFlag=`portUseByRedis $port`
     if [ $useFlag -eq 1 ]; then
         echo "端口[$port]依然被redis服务占用，强行关闭"

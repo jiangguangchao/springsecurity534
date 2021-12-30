@@ -1,4 +1,5 @@
 #! /bin/bash
 
-count=66
-./test2.sh
+
+str="abc, cd 11, ff, "
+echo ${str%,*}

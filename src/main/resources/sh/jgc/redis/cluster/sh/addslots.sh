@@ -12,7 +12,7 @@ do
 #	echo "slot_start:"$slot_start
 #	echo "slot_end:"$slot_end
 	echo "开始给主节点[$port]分配slot[${slot_start}-$slot_end]"
-	redis-cli -p $port cluster addslots $(seq -s ' ' $slot_start $slot_end)
+	redis-cli -p $port -a jgc123 cluster addslots $(seq -s ' ' $slot_start $slot_end)
 	echo "主节点[$port]分配slot[${slot_start}-$slot_end]完成"
 done
 
