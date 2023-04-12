@@ -1,5 +1,6 @@
 package com.jgc.springsecurity.juc.test;
 
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -25,7 +26,8 @@ public class WaitTest {
                     if (atomicInteger.get() < 2) {
                         if (i == 50) {
                             try {
-                                obj.wait();
+                                obj.wait(1000);
+                                System.out.println("after t1 wait");
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
@@ -42,19 +44,21 @@ public class WaitTest {
                 atomicInteger.incrementAndGet();
                 for(int i = 0; i < 100 ; i++) {
                     System.out.println("线程：" + Thread.currentThread().getName() + "222222222--------" + i);
-                    if (atomicInteger.get() < 2) {
-                        if (i == 50) {
-                            try {
-                                obj.wait();
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
+//                    if (atomicInteger.get() < 2) {
+//                        if (i == 50) {
+//                            try {
+//                                obj.wait(1000);
+//                                System.out.println("after t2 wait");
+//                            } catch (InterruptedException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
 
                 }
             }
             System.out.println("线程：" + Thread.currentThread().getName() + "结束");
+
         }, "t2");
 
         Thread t3 = new Thread(() -> {
@@ -62,6 +66,7 @@ public class WaitTest {
                 atomicInteger.incrementAndGet();
                 for(int i = 0; i < 100 ; i++) {
                     System.out.println("线程：" + Thread.currentThread().getName() + "3333333333---------" + i);
+
 
                     if (atomicInteger.get() == 1 || atomicInteger.get() == 2) {
                         if (i == 50) {
@@ -76,6 +81,7 @@ public class WaitTest {
                 }
             }
             System.out.println("线程：" + Thread.currentThread().getName() + "结束");
+//            obj.notify();
         }, "t3");
 
         t1.start();

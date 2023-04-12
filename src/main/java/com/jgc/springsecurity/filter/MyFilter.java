@@ -20,9 +20,18 @@ public class MyFilter implements Filter {
 
     private static final Logger log = LoggerFactory.getLogger(MyFilter.class);
 
+    public MyFilter(){
+        log.info("MyFilter constractor................");
+    }
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        log.info("----------这里是自定义过滤器---------------");
-        chain.doFilter(request, response);
+        try {
+            log.info("----------这里是自定义过滤器---------------");
+            chain.doFilter(request, response);
+        } finally {
+            log.info("-----------自定义过滤器的finally-----------");
+            log.info("response: {}", response);
+        }
     }
 }

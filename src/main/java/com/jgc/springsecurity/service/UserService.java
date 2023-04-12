@@ -21,4 +21,10 @@ public interface UserService {
     public void saveUser(User user);
 
     public void saveUserForMap(Map user);
+
+    public String testTx();
+
+    public void setAtom(Integer a);
+    public Integer getAtom();
+
 }

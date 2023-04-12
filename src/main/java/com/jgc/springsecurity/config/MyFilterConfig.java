@@ -1,6 +1,9 @@
 package com.jgc.springsecurity.config;
 
+import com.jgc.springsecurity.ctrl.UserCtrl;
 import com.jgc.springsecurity.filter.MyFilter;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.DelegatingFilterProxyRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +17,9 @@ import org.springframework.core.annotation.Order;
  */
 
 
-@Configuration
+//@Configuration
+//@ConditionalOnClass(UserCtrl.class)
+//@ConditionalOnProperty(prefix = "myredis", name = "redisaaa", havingValue = "bbb", matchIfMissing = true)
 public class MyFilterConfig {
 
 

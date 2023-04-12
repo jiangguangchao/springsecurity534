@@ -25,15 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 
-@Transactional
-@RestController
+//@RestController
 public class HelloCtrl implements BeanFactoryAware {
 
     private static final Logger log = LoggerFactory.getLogger(HelloCtrl.class);
 
     private BeanFactory beanFactory;
 
-    @RequestMapping("/hello")
+//    @RequestMapping("/hello")
     public String hello() {
 
         if (beanFactory == null) {
@@ -94,10 +93,7 @@ public class HelloCtrl implements BeanFactoryAware {
 
 
     public static void main(String[] args) {
-        Boolean f = null;
-        HelloCtrl h = new HelloCtrl();
-        h.change(f);
-        System.out.println(f);
+        System.out.println(System.getProperty("jgcaaaab"));
 
     }
 

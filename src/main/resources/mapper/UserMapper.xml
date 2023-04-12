@@ -11,10 +11,11 @@
         <result column="startWrokTime" property="startWrokTime" />
         <result column="birthday" property="birthday" />
         <result column="leaveTime" property="leaveTime" />
+        <result column="age" property="age" />
     </resultMap>
 
     <sql id="colum" >
-		id, username, password, status, createTime, startWrokTime,birthday,leaveTime
+		id, username, password, status, createTime, startWrokTime,birthday,leaveTime, age
 	</sql>
 
     <select id="getUser" parameterType="User" resultType="User">
@@ -84,6 +85,11 @@
             #{leaveTime}
         );
     </insert>
+
+    <update id="updateUserAge" parameterType="User">
+        update t_user set age = #{age}
+        where id = #{id}
+    </update>
 
 
 </mapper>

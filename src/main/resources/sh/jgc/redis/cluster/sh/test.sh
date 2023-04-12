@@ -1,5 +1,4 @@
 #! /bin/bash
 
-
-str="abc, cd 11, ff, "
-echo ${str%,*}
+basepath=`dirname $0`
+echo $basepath

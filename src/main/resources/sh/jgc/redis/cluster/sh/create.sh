@@ -1,8 +1,8 @@
 #! /bin/bash
 
-mCount=1
+mCount=2
 mPortStart=7100
-sCount=1
+sCount=2
 sPortStart=7200
 echo "这是一个创建redis集群的脚本，该脚本通过不同的端口启动多个redis服务，集群会有${mCount}个主节点，$sCount个从节点"
 echo "端口如下，其中括号中的表示从节点端口号"
@@ -16,7 +16,7 @@ echo "----------------------------先关闭已启动的redis服务--------------
 #./shutAll.sh $mCount $mPortStart
 #./shutAll.sh $sCount $sPortStart
 
- ./shutAll.sh 4 $mPortStart
+./shutAll.sh 4 $mPortStart
 ./shutAll.sh 4 $sPortStart
 echo "----------------------------已启动的redis服务关闭完毕------------------------"
 echo ""

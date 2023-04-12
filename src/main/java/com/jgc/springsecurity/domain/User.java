@@ -1,6 +1,7 @@
 package com.jgc.springsecurity.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -15,12 +16,12 @@ public class User {
     private String username;
     private String password;
     private Integer status;
-
+    private Integer age;
 
     /**
      * 对应数据库是datetime类型
      */
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+//    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     /**
@@ -103,5 +104,13 @@ public class User {
 
     public void setLeaveTime(Date leaveTime) {
         this.leaveTime = leaveTime;
+    }
+
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
     }
 }

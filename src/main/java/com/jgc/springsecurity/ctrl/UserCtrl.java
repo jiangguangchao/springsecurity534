@@ -6,8 +6,12 @@ import com.jgc.springsecurity.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +22,11 @@ import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
+import java.util.concurrent.CountDownLatch;
 
 @RestController
 @RequestMapping("/user")
-@Transactional
+//@Transactional
 public class UserCtrl {
     
     private static final Logger log = LoggerFactory.getLogger(UserCtrl.class);
@@ -43,6 +48,10 @@ public class UserCtrl {
         response.setHeader("MyHeader", myHeader);
         response.setContentType("text/html; charset=UTF-8");
 
+        System.out.println("测试汉字");
+        System.out.println("测试汉");
+        System.out.println("测");
+
         return "userList";
     }
 
@@ -58,7 +67,9 @@ public class UserCtrl {
     }
 
     @GetMapping("/id")
+    @Transactional
     public User getUser(@RequestParam Integer id) {
+        log.info("id[{}]", id);
         User u = userService.getUser(id);
         return u;
     }
@@ -70,13 +81,8 @@ public class UserCtrl {
     }
 
     @PostMapping("/add")
-    public String add( User user) {
-        System.out.println("打印userService:" + userService.getClass().getName());
-//        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//        String encoderPassword = encoder.encode(user.getPassword());
-//        user.setPassword(encoderPassword);
-        userService.saveUser(user);
-        System.out.println("添加用户成功 userService:" + userService);
+    public String add(@RequestBody User user){
+        log.info("新增用户 入口参数记录 user:[{}]", JSON.toJSONString(user));
         return "user add success";
     }
 
@@ -243,16 +249,27 @@ public class UserCtrl {
         return simpleDateFormat.format(date);
     }
 
+    @GetMapping("/testTx")
+    @Transactional(isolation = Isolation.DEFAULT)
+    public String testTx(@RequestParam Integer count) {
+        userService.setAtom(0);
+        final CountDownLatch latch = new CountDownLatch(count);
+        try {
+            for (int i = 0; i < latch.getCount(); i++) {
+                new Thread(() -> {
+                    userService.testTx();
+                }).start();
+            }
+        } catch (Exception e) {
+            log.error("事务测试异常", e);
+        }
+        log.info("atom结果是：" + userService.getAtom());
+        return "test....";
+    }
+
 
 
     public static void main(String[] args) throws UnsupportedEncodingException {
-        String str = URLEncoder.encode("中文测试", "UTF-8");
-        System.out.println(str);
-
-        System.out.println("length:" + str.length());
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            System.out.println("c: " + c);
-        }
+        System.out.println(System.getProperty("file.encoding"));
     }
 }

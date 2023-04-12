@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @create: 2021-09-24 14:41
  */
 
-@Component
+//@Component
 public class MySpringListener implements ApplicationListener {
 
     private static final Logger log = LoggerFactory.getLogger(MySpringListener.class);

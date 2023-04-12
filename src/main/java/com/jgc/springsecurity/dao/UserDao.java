@@ -14,4 +14,5 @@ public interface UserDao {
     public List<Permission> getPermissions(String username);
     public void saveUser(User user);
     public void saveUserForMap(Map user);
+    public int updateUserAge(User user);
 }

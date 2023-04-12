@@ -17,7 +17,7 @@
         </filter>
         <encoder>
             <!--%logger{50}:表示logger名字最长50个字符，否则按照句点分割-->
-            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{50}.%M %L -- %msg%n</Pattern>
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{50}.%M %L ---- %msg%n</Pattern>
             <!-- 设置字符集 -->
             <charset>UTF-8</charset>
         </encoder>
@@ -75,7 +75,7 @@
     <!--开发环境:打印控制台-->
     <springProfile name="dev">
         <!--<logger name="com.phfund" level="debug"/>-->
-        <root level="debug">
+        <root level="info">
             <appender-ref ref="CONSOLE" />
 <!--            <appender-ref ref="RUNTIME" />-->
 <!--            <appender-ref ref="ERROR" />-->

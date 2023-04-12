@@ -22,6 +22,7 @@ public class Test1 {
     }
 
     public void f1() {
+
         StandardEvaluationContext context = new StandardEvaluationContext();
         context.setVariable("nihao","hellosdfeg nihao");
         ExpressionParser parser = new SpelExpressionParser();

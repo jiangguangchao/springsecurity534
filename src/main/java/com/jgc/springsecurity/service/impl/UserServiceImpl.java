@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionManager;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.DefaultTransactionAttribute;
+import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @program: springsecurity534
@@ -29,6 +31,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    private static List<String> list = new ArrayList();
 
     @Autowired
     private DataSourceTransactionManager transactionManager;
@@ -104,5 +108,49 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUserForMap(Map user) {
         userDao.saveUserForMap(user);
+    }
+
+    public AtomicInteger atom = new AtomicInteger(0);
+
+    @Override
+    public synchronized String testTx() {
+
+        TransactionStatus ts = transactionManager.getTransaction(new DefaultTransactionDefinition());
+        User u = getUser(1);
+        u.setAge(u.getAge() + 1);
+        int result = userDao.updateUserAge(u);
+        if (result < 1) {
+            log.error("更新失败");
+            return null;
+        }
+        atom.incrementAndGet();
+        transactionManager.commit(ts);
+
+        return null;
+    }
+
+    @Override
+    public void setAtom(Integer a) {
+        atom.set(a);
+    }
+
+    @Override
+    public Integer getAtom() {
+        return atom.get();
+    }
+
+    public static void main(String[] args) {
+        int a = 2;
+        int b = 5;
+        System.out.println("1");
+        System.out.println("2");
+        System.out.println("3");
+        b = 7;
+        a = 3;
+        list.add("bac");
+        System.out.println("11");
+        System.out.println("22");
+        System.out.println("33");
+
     }
 }

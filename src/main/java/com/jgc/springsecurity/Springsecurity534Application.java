@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @MapperScan("com.jgc.springsecurity.dao")
 //如果使用@Aspect注解，必须在启动类上加上@EnableAspectJAutoProxy注解，才能使@Aspect注解生效
-@EnableAspectJAutoProxy
+//@EnableAspectJAutoProxy
 public class Springsecurity534Application {
 
 	public static void main(String[] args) {
